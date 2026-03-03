@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Simon Scholars Program – University of Miami</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --green:   #005030;
+  --green2:  #003D24;
+  --orange:  #F47321;
+  --cream:   #FAF7F2;
+  --offwhite:#F2EDE5;
+  --dark:    #0C0C0C;
+  --mid:     #3A3A3A;
+  --muted:   #7A7A6E;
+  --line:    rgba(0,80,48,0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--dark);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+}
+
+/* grain overlay */
+body::after {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 900;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.25rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(250,247,242,0.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s;
+}
+.nav-left { display: flex; align-items: center; gap: 0.9rem; }
+.nav-diamond {
+  width: 28px; height: 28px;
+  background: var(--green);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  flex-shrink: 0;
+}
+.nav-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  line-height: 1.5;
+}
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--mid);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--orange); }
+.nav-cta {
+  background: var(--green) !important;
+  color: var(--cream) !important;
+  padding: 0.5rem 1.2rem;
+  font-weight: 500 !important;
+}
+.nav-cta:hover { background: var(--orange) !important; color: white !important; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: var(--green2);
+  color: var(--cream);
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: 8rem 3rem 5rem;
+  position: relative; overflow: hidden;
+}
+
+/* large decorative letter */
+.hero-deco {
+  position: absolute;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52vw;
+  font-weight: 700;
+  color: rgba(250,247,242,0.025);
+  line-height: 1;
+  top: 50%; right: -8vw;
+  transform: translateY(-50%);
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-deco-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(244,115,33,0.15);
+}
+.hero-deco-ring:nth-child(1) { width: 600px; height: 600px; bottom: -200px; left: -200px; }
+.hero-deco-ring:nth-child(2) { width: 400px; height: 400px; bottom: -100px; left: -100px; border-color: rgba(250,247,242,0.06); }
+
+.hero-inner { position: relative; z-index: 2; max-width: 1100px; }
+
+.hero-kicker {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 2.5rem;
+  opacity: 0; animation: riseIn 0.7s ease 0.1s forwards;
+}
+.hero-kicker span {
+  display: block; width: 36px; height: 1px; background: var(--orange);
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 9vw, 8.5rem);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  opacity: 0; animation: riseIn 0.8s ease 0.25s forwards;
+}
+h1 .italic { font-style: italic; color: var(--orange); font-weight: 400; }
+
+.hero-desc {
+  margin-top: 2.5rem;
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.8;
+  max-width: 560px;
+  opacity: 0.72;
+  opacity: 0; animation: riseIn 0.8s ease 0.45s forwards;
+}
+
+.hero-stats {
+  display: flex; gap: 0; margin-top: 4rem;
+  border: 1px solid rgba(250,247,242,0.12);
+  width: fit-content;
+  opacity: 0; animation: riseIn 0.8s ease 0.65s forwards;
+}
+.stat {
+  padding: 1.5rem 2.5rem;
+  border-right: 1px solid rgba(250,247,242,0.12);
+}
+.stat:last-child { border-right: none; }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.6rem;
+  font-weight: 600;
+  color: var(--orange);
+  line-height: 1;
+}
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-top: 0.35rem;
+}
+
+.hero-scroll {
+  position: absolute; bottom: 3rem; right: 3rem; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  writing-mode: vertical-rl;
+  animation: fadeIn 1s ease 1s both;
+}
+.hero-scroll::after {
+  content: '';
+  display: block; width: 1px; height: 48px;
+  background: currentColor;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:0.35}50%{opacity:0.8} }
+
+@keyframes riseIn {
+  from { opacity:0; transform: translateY(22px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+@keyframes fadeIn { from{opacity:0}to{opacity:1} }
+
+/* ── SHARED SECTION STYLES ── */
+section { padding: 7rem 3rem; }
+
+.eyebrow {
+  display: flex; align-items: center; gap: 0.75rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 1.25rem;
+}
+.eyebrow::before {
+  content: ''; display: block;
+  width: 24px; height: 1px; background: var(--orange);
+}
+
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--green);
+}
+h2 em { font-style: italic; font-weight: 400; color: var(--orange); }
+
+/* ── VISION ── */
+.vision { background: var(--cream); border-bottom: 1px solid var(--line); }
+
+.vision-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 5rem;
+  margin-top: 3.5rem;
+  align-items: start;
+}
+
+.vision-text p {
+  font-size: 1.08rem;
+  line-height: 1.9;
+  font-weight: 300;
+  color: var(--mid);
+  margin-bottom: 1.5rem;
+}
+
+.vision-pillars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line);
+}
+.pillar {
+  background: var(--cream);
+  padding: 2rem 1.75rem;
+  transition: background 0.2s;
+}
+.pillar:hover { background: white; }
+.pillar-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+}
+.pillar h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+}
+.pillar p {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--muted);
+  font-weight: 300;
+}
+
+/* ── PARTICIPANTS ── */
+.participants { background: white; border-bottom: 1px solid var(--line); }
+
+.participants-intro {
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--mid);
+  max-width: 680px;
+  margin-top: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.card {
+  position: relative;
+  padding: 3rem 2.5rem;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,80,48,0.1); }
+
+.card-accent {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+.card--scholars .card-accent { background: var(--green); }
+.card--fellows  .card-accent { background: var(--orange); }
+
+.card-badge {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.8rem;
+  margin-bottom: 1.5rem;
+}
+.card--scholars .card-badge { background: rgba(0,80,48,0.08); color: var(--green); }
+.card--fellows  .card-badge { background: rgba(244,115,33,0.1); color: var(--orange); }
+
+.card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--green);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+.card--fellows h3 { color: var(--orange); }
+
+.card p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  font-weight: 300;
+  color: var(--mid);
+  margin-bottom: 1.5rem;
+}
+
+.card-features {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 0.6rem;
+}
+.card-features li {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  font-size: 0.88rem;
+  color: var(--mid);
+  font-weight: 300;
+}
+.card-features li::before {
+  content: '→';
+  font-size: 0.75rem;
+  color: var(--orange);
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+
+.card-num {
+  position: absolute;
+  bottom: 1.5rem; right: 2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(0,80,48,0.05);
+  pointer-events: none;
+}
+.card--fellows .card-num { color: rgba(244,115,33,0.06); }
+
+/* ── PHASES ── */
+.phases { background: var(--green2); color: var(--cream); }
+
+.phases h2 { color: var(--cream); }
+.phases h2 em { color: var(--orange); }
+
+.phases-intro {
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.85;
+  opacity: 0.72;
+  max-width: 640px;
+  margin-top: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.phases-track {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+.phases-track::before {
+  content: '';
+  position: absolute;
+  left: 1.6rem; top: 0; bottom: 0;
+  width: 1px;
+  background: rgba(250,247,242,0.1);
+}
+
+.phase-row {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 2rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid rgba(250,247,242,0.07);
+  position: relative;
+  transition: background 0.2s;
+}
+.phase-row:last-child { border-bottom: none; }
+.phase-row:hover { background: rgba(250,247,242,0.03); }
+
+.phase-num-wrap {
+  display: flex; flex-direction: column; align-items: center;
+  padding-top: 0.25rem;
+}
+.phase-circle {
+  width: 3.2rem; height: 3.2rem;
+  border-radius: 50%;
+  border: 1px solid rgba(250,247,242,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+  background: var(--green2);
+  flex-shrink: 0;
+  position: relative; z-index: 1;
+  transition: background 0.2s, border-color 0.2s;
+}
+.phase-row:hover .phase-circle { background: var(--orange); color: white; border-color: var(--orange); }
+
+.phase-body { padding-right: 2rem; }
+
+.phase-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.5rem;
+}
+
+.phase-body h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 0.75rem;
+}
+
+.phase-body p {
+  font-size: 0.92rem;
+  line-height: 1.8;
+  opacity: 0.65;
+  font-weight: 300;
+  max-width: 680px;
+}
+
+.phase-date {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--orange);
+  background: rgba(244,115,33,0.1);
+  padding: 0.3rem 0.75rem;
+  border-radius: 2px;
+}
+
+/* ── INNOVATION LABS ── */
+.labs { background: var(--offwhite); border-bottom: 1px solid var(--line); }
+
+.labs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  margin-top: 3.5rem;
+  align-items: start;
+}
+
+.labs-left p {
+  font-size: 1rem;
+  line-height: 1.85;
+  font-weight: 300;
+  color: var(--mid);
+  margin-bottom: 1.2rem;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+.skill-chip {
+  padding: 0.75rem 1rem;
+  background: white;
+  border: 1px solid var(--line);
+  font-size: 0.82rem;
+  color: var(--mid);
+  font-weight: 300;
+  line-height: 1.4;
+  border-left: 2px solid var(--orange);
+}
+
+.schedule-card {
+  background: var(--green);
+  color: var(--cream);
+  padding: 2.5rem;
+}
+.schedule-card .sc-head {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.5rem;
+}
+.schedule-card .sc-time {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  opacity: 0.85;
+}
+
+.schedule-list {
+  display: flex; flex-direction: column;
+}
+
+.schedule-item {
+  display: flex; align-items: center; gap: 1.5rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(250,247,242,0.1);
+  transition: background 0.15s;
+}
+.schedule-item:last-child { border-bottom: none; }
+
+.si-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+.si-date {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+  min-width: 100px;
+}
+.si-label {
+  font-size: 0.9rem;
+  font-weight: 300;
+  opacity: 0.8;
+}
+.si-highlight { opacity: 1 !important; font-weight: 500; }
+
+/* ── OBJECTIVES ── */
+.objectives { background: var(--cream); border-bottom: 1px solid var(--line); }
+
+.obj-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+}
+
+.obj-item {
+  padding: 2rem;
+  border: 1px solid var(--line);
+  background: white;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.obj-item:hover {
+  transform: translateY(-4px);
+  border-color: var(--orange);
+  box-shadow: 0 10px 30px rgba(0,80,48,0.08);
+}
+.obj-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--green);
+  opacity: 0.1;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+.obj-item p {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  font-weight: 300;
+  color: var(--mid);
+}
+
+/* ── EXPECTATIONS ── */
+.expectations { background: var(--green); color: var(--cream); }
+
+.expectations h2 { color: var(--cream); }
+
+.exp-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  margin-top: 3.5rem;
+}
+
+.exp-left p {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  font-weight: 300;
+  opacity: 0.72;
+  margin-bottom: 1.2rem;
+}
+
+.exp-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.exp-list li {
+  display: flex; gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(250,247,242,0.05);
+  border: 1px solid rgba(250,247,242,0.08);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  font-weight: 300;
+  opacity: 0.8;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.exp-list li:hover { opacity: 1; border-color: var(--orange); }
+.exp-list li::before {
+  content: '✓';
+  color: var(--orange);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.recognition-box {
+  padding: 2.5rem;
+  border: 1px solid rgba(244,115,33,0.4);
+  background: rgba(244,115,33,0.06);
+}
+.recognition-box .rb-head {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 1rem;
+}
+.recognition-box p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  font-weight: 300;
+  opacity: 0.75;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark);
+  color: var(--cream);
+  padding: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.footer-left { display: flex; align-items: center; gap: 1.25rem; }
+.footer-diamond {
+  width: 28px; height: 28px;
+  background: var(--orange);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  flex-shrink: 0;
+}
+.footer-info p {
+  font-size: 0.82rem;
+  opacity: 0.4;
+  line-height: 1.7;
+  font-weight: 300;
+}
+.footer-right {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.3;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  section { padding: 4.5rem 1.5rem; }
+  .hero { padding: 7rem 1.5rem 4rem; }
+  .vision-layout, .labs-grid, .exp-layout,
+  .cards, .participants-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .obj-grid { grid-template-columns: 1fr 1fr; }
+  .hero-stats { flex-direction: column; }
+  .stat { border-right: none; border-bottom: 1px solid rgba(250,247,242,0.12); }
+  .stat:last-child { border-bottom: none; }
+  h1 { font-size: 4rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <div class="nav-diamond"></div>
+    <div class="nav-title">Simon Scholars Program<br>University of Miami · Sport Administration</div>
+  </div>
+  <div class="nav-links">
+    <a href="#vision">Vision</a>
+    <a href="#participants">Scholars &amp; Fellows</a>
+    <a href="#phases">Phases</a>
+    <a href="#labs">Innovation Labs</a>
+    <a href="#summit" class="nav-cta">The Summit →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-deco">S</div>
+  <div class="hero-deco-ring"></div>
+  <div class="hero-deco-ring"></div>
+
+  <div class="hero-inner">
+    <p class="hero-kicker"><span></span>Spring 2026 Cohort · University of Miami</p>
+    <h1>Simon<br><span class="italic">Scholars</span><br>Program</h1>
+    <p class="hero-desc">An elite co-curricular initiative that cultivates innovative, solution-driven thinkers prepared to excel in sport, business, and entrepreneurial environments.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">12</div>
+        <div class="stat-label">Scholars Selected</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Program Phases</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">Mar 26</div>
+        <div class="stat-label">Simon Summit</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">6:30</div>
+        <div class="stat-label">Innovation Labs PM</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">Explore</div>
+</header>
+
+<!-- VISION -->
+<section class="vision" id="vision">
+  <p class="eyebrow">Program Vision</p>
+  <h2>Cultivating the Next Generation<br>of <em>Sport & Business Leaders</em></h2>
+  <div class="vision-layout">
+    <div class="vision-text">
+      <p>The Simon Scholars Program is an elite co-curricular experiential learning initiative designed to cultivate innovative, solution-driven thinkers prepared to excel in sport, business, and entrepreneurial environments.</p>
+      <p>Through immersive, collaborative experiences that integrate design thinking, professional mentorship, and real-world problem-solving, students develop the mindset, confidence, and strategic capacity needed to contribute meaningfully to future organizations and industries.</p>
+      <p>Grounded in reciprocal mentoring and cross-generational collaboration, the program positions students to thrive in dynamic professional settings and prepares them to navigate complex challenges with creativity, rigor, and purpose.</p>
+    </div>
+    <div class="vision-pillars">
+      <div class="pillar">
+        <div class="pillar-icon">🧠</div>
+        <h4>Design Thinking</h4>
+        <p>Structured ideation methodologies to solve real-world challenges creatively and systematically.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🤝</div>
+        <h4>Mentorship</h4>
+        <p>Reciprocal, cross-generational collaboration with sport and business industry leaders.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">⚡</div>
+        <h4>Real-World Application</h4>
+        <p>Bridging theory to practice — students apply classroom knowledge to live industry challenges.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🎯</div>
+        <h4>Strategic Capacity</h4>
+        <p>Building the confidence and critical thinking required to lead in complex, dynamic environments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTICIPANTS -->
+<section class="participants" id="participants">
+  <p class="eyebrow">Program Participants</p>
+  <h2>Scholars &amp; <em>Fellows</em></h2>
+  <p class="participants-intro">The program distinguishes between two tiers of participants — each with a distinct role in the journey from selection to professional immersion.</p>
+
+  <div class="cards">
+    <div class="card card--scholars">
+      <div class="card-accent"></div>
+      <span class="card-badge">Foundation Tier</span>
+      <h3>Simon Scholars</h3>
+      <p>Simon Scholars are all students selected to participate in the program. Scholars engage in the core developmental components, building foundational skills in problem-solving, innovation, communication, and strategic thinking.</p>
+      <ul class="card-features">
+        <li>Required participation in all Innovation Labs</li>
+        <li>Engagement in the Simon Development Series</li>
+        <li>Access to professional mentorship and peer collaboration</li>
+        <li>Invited to observe and learn at The Simon Summit</li>
+      </ul>
+      <div class="card-num">S</div>
+    </div>
+
+    <div class="card card--fellows">
+      <div class="card-accent"></div>
+      <span class="card-badge">Elite Advancement</span>
+      <h3>Simon Fellows</h3>
+      <p>Simon Fellows are the highest-performing participants, chosen from the Scholars cohort based on performance, engagement, and demonstrated growth during the Innovation Labs. They advance to the program's culminating experiences.</p>
+      <ul class="card-features">
+        <li>Selected to compete at The Simon Summit</li>
+        <li>Access to the Simon Externship Experience</li>
+        <li>Real-world professional immersion opportunities</li>
+        <li>Priority consideration for career placements</li>
+      </ul>
+      <div class="card-num">F</div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASES -->
+<section class="phases" id="phases">
+  <p class="eyebrow" style="color:var(--orange);">Program Structure</p>
+  <h2>Five Phases of a<br><em>Comprehensive Journey</em></h2>
+  <p class="phases-intro">The program is structured across five key phases that create a complete developmental arc — from competitive selection through real-world professional immersion.</p>
+
+  <div class="phases-track">
+    <div class="phase-row">
+      <div class="phase-num-wrap">
+        <div class="phase-circle">01</div>
+      </div>
+      <div class="phase-body">
+        <p class="phase-tag">Phase One</p>
+        <h3>Selection Process</h3>
+        <p>Students are selected as Simon Scholars through a competitive, multi-step application process assessing motivation, readiness, creativity, and alignment with program expectations. 12 Scholars are chosen from a competitive applicant pool.</p>
+        <span class="phase-date">Deadline: Jan 5, 2026 · Notifications: Jan 14, 2026</span>
+      </div>
+    </div>
+
+    <div class="phase-row">
+      <div class="phase-num-wrap">
+        <div class="phase-circle">02</div>
+      </div>
+      <div class="phase-body">
+        <p class="phase-tag">Phase Two</p>
+        <h3>Innovation Labs</h3>
+        <p>All Simon Scholars participate in required, seminar-style Innovation Labs focused on design thinking, strategic problem-solving, and collaboration with industry professionals. Performance in Labs determines advancement to Simon Fellow status.</p>
+        <span class="phase-date">Jan 20 – Mar 17, 2026 · Every other Monday, 6:30–9:30 PM</span>
+      </div>
+    </div>
+
+    <div class="phase-row">
+      <div class="phase-num-wrap">
+        <div class="phase-circle">03</div>
+      </div>
+      <div class="phase-body">
+        <p class="phase-tag">Phase Three</p>
+        <h3>The Simon Summit</h3>
+        <p>Simon Fellows compete in The Simon Summit, delivering 10–12-minute strategic solutions to a real-world sport or business challenge before a panel of respected industry leaders. Scholars observe and continue learning from peer presentations.</p>
+        <span class="phase-date">March 26, 2026</span>
+      </div>
+    </div>
+
+    <div class="phase-row">
+      <div class="phase-num-wrap">
+        <div class="phase-circle">04</div>
+      </div>
+      <div class="phase-body">
+        <p class="phase-tag">Phase Four</p>
+        <h3>Simon Development Series</h3>
+        <p>Both Scholars and Fellows participate in professional development sessions led by sport and business leaders. Workshops focus on leadership presence, personal branding, networking, career strategy, and ecosystem building.</p>
+        <span class="phase-date">Post-Summit · Spring 2026</span>
+      </div>
+    </div>
+
+    <div class="phase-row">
+      <div class="phase-num-wrap">
+        <div class="phase-circle">05</div>
+      </div>
+      <div class="phase-body">
+        <p class="phase-tag">Phase Five · Fellows Only</p>
+        <h3>Simon Externship Experience</h3>
+        <p>Reserved for Simon Fellows. This immersive professional opportunity bridges the gap between classroom learning and real-world practice — placing Fellows inside partner organizations to apply their skills in live industry environments.</p>
+        <span class="phase-date">Curated by the Simons &amp; Partner Organizations</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INNOVATION LABS -->
+<section class="labs" id="labs">
+  <p class="eyebrow">Innovation Labs</p>
+  <h2>The Experiential <em>Core</em></h2>
+  <div class="labs-grid">
+    <div class="labs-left">
+      <p>Innovation Labs serve as the experiential heart of the Simon Scholars Program. Designed as high-impact preparation for the competition phase, these industry-embedded sessions equip students with skills they will use throughout their professional careers.</p>
+      <p>Beyond preparation for the Summit, Labs develop the problem-solving instincts, analytical frameworks, and collaborative leadership habits that define outstanding sport business professionals.</p>
+      <div class="skills-grid">
+        <div class="skill-chip">Collaborative Problem-Solving</div>
+        <div class="skill-chip">Design Thinking Methodology</div>
+        <div class="skill-chip">Strategic Communication</div>
+        <div class="skill-chip">Real Industry Analysis</div>
+        <div class="skill-chip">Creativity &amp; Ideation</div>
+        <div class="skill-chip">Reciprocal Mentoring</div>
+      </div>
+    </div>
+
+    <div class="schedule-card">
+      <p class="sc-head">2026 Schedule</p>
+      <p class="sc-time">Every session: 6:30 PM – 9:30 PM</p>
+      <div class="schedule-list">
+        <div class="schedule-item">
+          <div class="si-dot"></div>
+          <div class="si-date">Jan 20</div>
+          <div class="si-label si-highlight">Prelude Meeting</div>
+        </div>
+        <div class="schedule-item">
+          <div class="si-dot"></div>
+          <div class="si-date">Feb 3</div>
+          <div class="si-label">Innovation Lab #1</div>
+        </div>
+        <div class="schedule-item">
+          <div class="si-dot"></div>
+          <div class="si-date">Feb 17</div>
+          <div class="si-label">Innovation Lab #2</div>
+        </div>
+        <div class="schedule-item">
+          <div class="si-dot"></div>
+          <div class="si-date">Mar 3</div>
+          <div class="si-label">Innovation Lab #3</div>
+        </div>
+        <div class="schedule-item">
+          <div class="si-dot"></div>
+          <div class="si-date">Mar 17</div>
+          <div class="si-label si-highlight">Finalists Preparation Meeting</div>
+        </div>
+        <div class="schedule-item" style="border-top: 1px solid rgba(244,115,33,0.3); margin-top:0.5rem; padding-top:1rem;">
+          <div class="si-dot" style="background:white;"></div>
+          <div class="si-date" style="color:white;">Mar 26</div>
+          <div class="si-label si-highlight" style="opacity:1; color:var(--orange);">⭐ The Simon Summit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIVES -->
+<section class="objectives" id="objectives">
+  <p class="eyebrow">Program Objectives</p>
+  <h2>What This Program <em>Builds</em></h2>
+  <div class="obj-grid">
+    <div class="obj-item">
+      <div class="obj-num">01</div>
+      <p>Develop advanced solution-creation and problem-solving skills applicable across sport, business, and entrepreneurship.</p>
+    </div>
+    <div class="obj-item">
+      <div class="obj-num">02</div>
+      <p>Strengthen student readiness for careers, internships, and graduate programs through real-world challenge-based learning.</p>
+    </div>
+    <div class="obj-item">
+      <div class="obj-num">03</div>
+      <p>Cultivate leadership, communication, professionalism, and innovation as core professional competencies.</p>
+    </div>
+    <div class="obj-item">
+      <div class="obj-num">04</div>
+      <p>Foster reciprocal mentoring and collaborative learning among students, faculty, and industry professionals.</p>
+    </div>
+    <div class="obj-item">
+      <div class="obj-num">05</div>
+      <p>Connect classroom knowledge to real-world application through structured co-curricular engagement.</p>
+    </div>
+    <div class="obj-item">
+      <div class="obj-num">06</div>
+      <p>Provide UM Sport Administration students with an experiential learning opportunity that nurtures growth, development, and confidence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPECTATIONS -->
+<section class="expectations" id="expectations">
+  <p class="eyebrow" style="color:var(--orange);">Expectations</p>
+  <h2>Full Commitment.<br>Full <em>Reward.</em></h2>
+  <div class="exp-layout">
+    <div class="exp-left">
+      <p>Students selected for the Simon Scholars Program are expected to commit fully. This commitment is what separates the experience from a standard class — and what makes the recognition meaningful.</p>
+      <p>Scholars who successfully complete all phases receive formal recognition, résumé-building experiences, and priority consideration for Simon Fellow Externship placements and professional opportunities.</p>
+      <div class="recognition-box" style="margin-top:2rem;">
+        <p class="rb-head">Upon Completion</p>
+        <p>Formal recognition, résumé-building credentials, and priority consideration for Externship placements and related professional opportunities within the Simon network.</p>
+      </div>
+    </div>
+    <div>
+      <ul class="exp-list">
+        <li>Attend all required Innovation Labs and program events</li>
+        <li>Demonstrate professionalism in all interactions with faculty, peers, and industry professionals</li>
+        <li>Wear business attire for designated sessions and The Simon Summit</li>
+        <li>Engage actively in collaborative learning, group work, and reciprocal mentoring</li>
+        <li>Complete all required deliverables, including reflections, presentations, and externship materials</li>
+        <li>Maintain strong communication and follow-through throughout the program</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-diamond"></div>
+    <div class="footer-info">
+      <p>Simon Scholars Program · University of Miami<br>School of Education &amp; Human Development · Sport Administration</p>
+    </div>
+  </div>
+  <span class="footer-right">Spring 2026 Cohort</span>
+</footer>
+
+</body>
+</html>
